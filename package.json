@@ -6,13 +6,15 @@
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.4.0",
+    "axios": "^0.21.0",
+    "query-string": "^6.13.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "dev": "PORT=3001 REACT_APP_ENVIRONMENT=DEVELOPMENT react-scripts start",
+    "dev": "PORT=4001 REACT_APP_ENVIRONMENT=DEVELOPMENT react-scripts start",
     "start": "REACT_APP_ENVIRONMENT=PRODUCTION react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
