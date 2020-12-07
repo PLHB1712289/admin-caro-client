@@ -14,8 +14,9 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "dev": "PORT=4001 REACT_APP_ENVIRONMENT=DEVELOPMENT react-scripts start",
-    "start": "REACT_APP_ENVIRONMENT=PRODUCTION react-scripts start",
+    "devMac": "PORT=4001 REACT_APP_ENVIRONMENT=DEVELOPMENT react-scripts start",
+    "devWin": "set PORT=4001 && REACT_APP_ENVIRONMENT=DEVELOPMENT && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
