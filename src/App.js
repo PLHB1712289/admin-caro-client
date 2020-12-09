@@ -1,24 +1,31 @@
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Home from "./components/home";
-import Login from "./components/login";
-import Profile from "./components/profile";
-import Register from "./components/register";
-import {AuthenticationProvider,AuthenticationContext} from "./provider/authentication-provider";
-import Navbar from "./components/navbar";
-import Header from "./components/header";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import SignIn from "./component/signIn";
+import Page from "./component/page";
+import NotFound from "./component/notFound";
+import ForgotPassword from "./component/forgotPassword";
 
 function App() {
-
   return (
-      <AuthenticationProvider>
-        <div className="App">
-          <Navbar/>
+    <Router>
+      <Switch>
+        <Route path={"/sign-in"}>
+          <SignIn />
+        </Route>
 
-        </div>
-      </AuthenticationProvider>
+        <Route path={"/forgot-password"}>
+          <ForgotPassword />
+        </Route>
 
+        <Route path={"/"}>
+          <Page />
+        </Route>
+
+        <Route>
+          <NotFound />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
