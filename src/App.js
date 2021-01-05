@@ -1,31 +1,30 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import SignIn from "./component/signIn";
-import Page from "./component/page";
-import NotFound from "./component/notFound";
-import ForgotPassword from "./component/forgotPassword";
+// import SignIn from "./components/signIn";
+import NotFound from "./components/notFound";
+import Dashboard from "./components/dashboard";
+import { CssBaseline } from "@material-ui/core";
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path={"/sign-in"}>
-          <SignIn />
-        </Route>
+    <React.Fragment>
+      <CssBaseline />
+      <Router>
+        <Switch>
+          {/* <Route path={"/signin"}>
+            <SignIn />
+          </Route> */}
 
-        <Route path={"/forgot-password"}>
-          <ForgotPassword />
-        </Route>
+          <Route path={"/"}>
+            <Dashboard />
+          </Route>
 
-        <Route path={"/"}>
-          <Page />
-        </Route>
-
-        <Route>
-          <NotFound />
-        </Route>
-      </Switch>
-    </Router>
+          <Route>
+            <NotFound />
+          </Route>
+        </Switch>
+      </Router>
+    </React.Fragment>
   );
 }
 
