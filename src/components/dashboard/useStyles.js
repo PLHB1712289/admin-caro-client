@@ -1,19 +1,8 @@
 import { makeStyles } from "@material-ui/core/styles";
-const drawerWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-  },
-
-  drawerPaper: {
-    position: "relative",
-    whiteSpace: "nowrap",
-    width: drawerWidth,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
