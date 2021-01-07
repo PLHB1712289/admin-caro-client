@@ -35,7 +35,12 @@ export default function UserGrid() {
     { columnName: "username", editingEnabled: false },
   ]);
 
-  const [query, setQuery, commitChanges] = useQuery(URL, "users");
+  const [query, setQuery, commitChanges] = useQuery(
+    URL,
+    "users",
+    "user",
+    "username"
+  );
   const setSorting = setQuery.setSorting;
   const setFilters = (filters) => {
     setQuery.setFiltering(filters);

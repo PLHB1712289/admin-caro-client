@@ -19,7 +19,7 @@ export default function SideBar({ open, onDrawerClose }) {
       onClose={onDrawerClose}
     >
       <List>
-        <ListSubheader inset>Saved reports</ListSubheader>
+        <ListSubheader inset>Admin management</ListSubheader>
         <ListItem button>
           <ListItemIcon>
             <AssignmentIcon />
@@ -36,7 +36,10 @@ export default function SideBar({ open, onDrawerClose }) {
           <ListItemIcon>
             <AssignmentIcon />
           </ListItemIcon>
-          <ListItemText primary="For admin" />
+          <ListItemText
+            style={{ color: "red" }}
+            primary="Admin authorization"
+          />
         </ListItem>
       </List>
     </Drawer>
