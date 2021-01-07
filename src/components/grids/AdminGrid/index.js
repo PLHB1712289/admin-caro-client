@@ -40,7 +40,12 @@ export default function AdminGrid() {
     { columnName: "isSuperAdmin", filteringEnabled: false },
   ]);
 
-  const [query, setQuery, commitChanges] = useQuery(URL, "admins");
+  const [query, setQuery, commitChanges] = useQuery(
+    URL,
+    "admins",
+    "admin",
+    "username"
+  );
   const setSorting = setQuery.setSorting;
   const setFilters = (filters) => {
     setQuery.setFiltering(filters);
@@ -91,7 +96,7 @@ export default function AdminGrid() {
           showSortingControls
           contentComponent={({ children }) => <b>{children}</b>}
         />
-        <TableEditColumn showEditCommand showDeleteCommand />
+        <TableEditColumn showEditCommand showAddCommand showDeleteCommand />
         <TableFilterRow />
         <PopupEditing popupComponent={Popup} />
 

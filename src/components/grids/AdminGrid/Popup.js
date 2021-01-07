@@ -26,7 +26,7 @@ export default function Popup({
       fullWidth
       maxWidth="sm"
     >
-      <DialogTitle id="form-dialog-title">Employee Details</DialogTitle>
+      <DialogTitle id="form-dialog-title">User Details</DialogTitle>
       <DialogContent>
         <FormGroup>
           <TextField
@@ -35,6 +35,8 @@ export default function Popup({
             label="Username"
             value={row.username || ""}
             onChange={onChange}
+            required
+            disabled={row.isNew ? false : true}
           />
           <TextField
             margin="normal"
@@ -51,13 +53,24 @@ export default function Popup({
             value={row.email || ""}
             onChange={onChange}
           />
+          {row.isNew && (
+            <TextField
+              type="password"
+              margin="normal"
+              name="password"
+              label="Password"
+              value={row.password || ""}
+              onChange={onChange}
+              required
+            />
+          )}
           <FormControl margin="normal">
             <InputLabel id="right-label">Right</InputLabel>
             <Select
               name="isSuperAdmin"
               labelId="right-label"
               value={row.isSuperAdmin ? true : false}
-              // onChange={handleChange}
+              onChange={onChange}
             >
               <MenuItem value={false} selected>
                 Admin
@@ -71,7 +84,7 @@ export default function Popup({
         <Button onClick={onCancelChanges} color="primary">
           Cancel
         </Button>
-        <Button onClick={onApplyChanges} color="primary">
+        <Button onClick={onApplyChanges} color="primary" type="submit">
           Save
         </Button>
       </DialogActions>

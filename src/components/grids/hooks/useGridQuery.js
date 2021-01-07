@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import httpClient from "../../../httpClient";
 
-export default function useGridQuery(url, dataKey) {
+export default function useGridQuery(
+  url,
+  multipleDataKey,
+  singleDataKey,
+  paramKey
+) {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
@@ -35,7 +40,7 @@ export default function useGridQuery(url, dataKey) {
         if (response.data.error) {
           return console.log("Co loi xay ra");
         }
-        setData(response.data[dataKey]);
+        setData(response.data[multipleDataKey]);
         setLoading(false);
         setTotal(response.data.total);
       })
@@ -47,9 +52,9 @@ export default function useGridQuery(url, dataKey) {
     if (changes.deleted) {
       for (let index of changes.deleted) {
         const response = await httpClient.delete(
-          `${url}/${data[index].username}`
+          `${url}/${data[index][paramKey]}`
         );
-        if (response.data && response.data.user) {
+        if (response.data && response.data[singleDataKey]) {
           // Da xoa ban ghi cuoi cung cua trang
           if (data.length === 1 && page >= 2) {
             setPage(page - 1);
@@ -61,22 +66,40 @@ export default function useGridQuery(url, dataKey) {
     } else if (changes.changed) {
       for (let key in changes.changed) {
         const response = await httpClient.put(
-          `${url}/${data[key].username}`,
+          `${url}/${data[key][paramKey]}`,
           changes.changed[key]
         );
-        if (response.data && response.data.user) {
+        if (response.data && response.data[singleDataKey]) {
           setData([
             ...data.slice(0, +key),
-            response.data.user,
+            response.data[singleDataKey],
             ...data.slice(+key + 1),
           ]);
+        }
+      }
+    } else if (changes.added) {
+      for (let obj of changes.added) {
+        delete obj.isNew;
+        const response = await httpClient.post(url, obj);
+        if (response.data && response.data[singleDataKey]) {
+          const newData = [response.data[singleDataKey], ...data];
+          if (newData.length > perpage) newData.splice(perpage);
+          setData(newData);
+          setTotal(total + 1);
         }
       }
     }
     setLoading(false);
   }
 
-  useEffect(loadData, [url, dataKey, page, perpage, sorting, filtering]);
+  useEffect(loadData, [
+    url,
+    multipleDataKey,
+    page,
+    perpage,
+    sorting,
+    filtering,
+  ]);
 
   return [
     { data, page, perpage, sorting, filtering, loading, total },

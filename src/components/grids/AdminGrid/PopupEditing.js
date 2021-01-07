@@ -69,7 +69,7 @@ const PopupEditing = React.memo(({ popupComponent: Popup }) => (
               cancelChangedRows({ rowIds });
             }
           };
-
+          editedRow.isNew = isNew;
           const open = editingRowIds.length > 0 || isNew;
           return (
             <Popup
