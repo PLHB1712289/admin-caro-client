@@ -9,7 +9,7 @@ import {
 } from "@devexpress/dx-react-grid";
 import {
   Grid,
-  VirtualTable,
+  Table,
   TableHeaderRow,
   PagingPanel,
   TableEditRow,
@@ -30,15 +30,23 @@ export default function UserGrid() {
     { name: "name", title: "Name" },
     { name: "email", title: "Email" },
   ]);
-  const [query, setQuery] = useQuery(URL, "users");
+  const [editingStateColumnExtensions] = useState([
+    { columnName: "id", editingEnabled: false },
+    { columnName: "username", editingEnabled: false },
+  ]);
+
+  const [query, setQuery, commitChanges] = useQuery(URL, "users");
   const setSorting = setQuery.setSorting;
   const setFilters = (filters) => {
     setQuery.setFiltering(filters);
     setQuery.setPage(0);
   };
   const setCurrentPage = setQuery.setPage;
+  const setPageSize = (size) => {
+    setQuery.setPerpage(size);
+    setQuery.setPage(0);
+  };
 
-  const commitChanges = console.log;
   return (
     <Paper style={{ position: "relative" }}>
       <Grid rows={query.data} columns={columns}>
@@ -47,11 +55,15 @@ export default function UserGrid() {
           currentPage={query.page}
           onCurrentPageChange={setCurrentPage}
           pageSize={query.perpage}
+          onPageSizeChange={setPageSize}
         />
         <CustomPaging totalCount={query.total} />
-        <EditingState onCommitChanges={commitChanges} />
+        <EditingState
+          onCommitChanges={commitChanges}
+          columnExtensions={editingStateColumnExtensions}
+        />
         <FilteringState onFiltersChange={setFilters} />
-        <VirtualTable />
+        <Table />
         <TableHeaderRow
           showSortingControls
           contentComponent={({ children }) => <b>{children}</b>}
@@ -60,7 +72,7 @@ export default function UserGrid() {
         <TableEditColumn showEditCommand showDeleteCommand />
         <TableFilterRow />
 
-        <PagingPanel />
+        <PagingPanel pageSizes={[10, 20, 30]} />
       </Grid>
       {query.loading && <Loading />}
     </Paper>
