@@ -5,6 +5,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import { Drawer, List } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import useStyles from "./useStyles";
 
 export default function SideBar({ open, onDrawerClose }) {
@@ -20,19 +21,19 @@ export default function SideBar({ open, onDrawerClose }) {
     >
       <List>
         <ListSubheader inset>Admin management</ListSubheader>
-        <ListItem button>
+        <ListItem button component={Link} to="/users" onClick={onDrawerClose}>
           <ListItemIcon>
             <AssignmentIcon />
           </ListItemIcon>
           <ListItemText primary="User management" />
         </ListItem>
-        <ListItem button>
+        <ListItem button component={Link} to="/games" onClick={onDrawerClose}>
           <ListItemIcon>
             <AssignmentIcon />
           </ListItemIcon>
           <ListItemText primary="Game management" />
         </ListItem>
-        <ListItem button>
+        <ListItem button component={Link} to="/admins" onClick={onDrawerClose}>
           <ListItemIcon>
             <AssignmentIcon />
           </ListItemIcon>

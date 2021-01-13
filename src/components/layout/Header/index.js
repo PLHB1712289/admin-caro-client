@@ -1,16 +1,8 @@
-import {
-  AppBar,
-  Badge,
-  IconButton,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
-import {
-  Menu as MenuIcon,
-  Notifications as NotificationsIcon,
-} from "@material-ui/icons";
+import { AppBar, IconButton, Toolbar, Typography } from "@material-ui/core";
+import { Menu as MenuIcon } from "@material-ui/icons";
 import React from "react";
 import useStyles from "./useStyles";
+import { Link } from "react-router-dom";
 
 export default function Header({ onDrawerOpen }) {
   const classes = useStyles();
@@ -29,19 +21,16 @@ export default function Header({ onDrawerOpen }) {
         </IconButton>
 
         <Typography
-          component="h1"
           variant="h6"
           color="inherit"
           noWrap
           className={classes.title}
+          component={Link}
+          style={{ textDecoration: "none" }}
+          to="/"
         >
           Dashboard
         </Typography>
-        <IconButton color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
       </Toolbar>
     </AppBar>
   );
