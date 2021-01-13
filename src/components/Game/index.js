@@ -40,16 +40,18 @@ export default function Game() {
     setLoading(true);
     const params = page ? { page: total - page + 1 } : {};
     httpClient.get(MOVES_URL, { params }).then((res) => {
-      const board = res.data.moves[0].board;
-      const currentPage = page ? page : res.data.total;
-      const total = res.data.total;
-      const rowValues = [];
-      for (let i = 0, j = board.length; i < j; i += size) {
-        rowValues.push(board.slice(i, i + size));
+      if (res.data.moves.length > 0) {
+        const board = res.data.moves[0].board;
+        const currentPage = page ? page : res.data.total;
+        const total = res.data.total;
+        const rowValues = [];
+        for (let i = 0, j = board.length; i < j; i += size) {
+          rowValues.push(board.slice(i, i + size));
+        }
+        setRowValues(rowValues);
+        setPage(currentPage);
+        setTotal(total);
       }
-      setRowValues(rowValues);
-      setPage(currentPage);
-      setTotal(total);
       setLoading(false);
     });
   }
