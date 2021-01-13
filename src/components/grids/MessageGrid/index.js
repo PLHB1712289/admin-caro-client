@@ -4,7 +4,6 @@ import {
   PagingState,
   CustomPaging,
   SortingState,
-  EditingState,
   FilteringState,
 } from "@devexpress/dx-react-grid";
 import {
@@ -12,35 +11,23 @@ import {
   Table,
   TableHeaderRow,
   PagingPanel,
-  TableEditRow,
-  TableEditColumn,
   TableFilterRow,
 } from "@devexpress/dx-react-grid-material-ui";
+
 import config from "../../../config";
 import useQuery from "../hooks/useGridQuery";
 import Loading from "../../shared/loading";
 
-const URL = `${config.URL_SERVER}/users`;
-
-export default function UserGrid() {
+export default function MessageGrid({ idGame }) {
+  const URL = `${config.URL_SERVER}/games/${idGame}/messages`;
   // Du lieu co ban cho bang
   const [columns] = useState([
-    { name: "id", title: "ID" },
     { name: "username", title: "Username" },
-    { name: "name", title: "Name" },
-    { name: "email", title: "Email" },
-  ]);
-  const [editingStateColumnExtensions] = useState([
-    { columnName: "id", editingEnabled: false },
-    { columnName: "username", editingEnabled: false },
+    { name: "message", title: "Message" },
+    { name: "created_at", title: "Sent at" },
   ]);
 
-  const [query, setQuery, commitChanges] = useQuery(
-    URL,
-    "users",
-    "user",
-    "username"
-  );
+  const [query, setQuery] = useQuery(URL, "games", "game", "idGame");
   const setSorting = setQuery.setSorting;
   const setFilters = (filters) => {
     setQuery.setFiltering(filters);
@@ -52,8 +39,22 @@ export default function UserGrid() {
     setQuery.setPage(0);
   };
 
+  // const RightFormatter = ({ value }) => (
+  //   <b
+  //     style={{
+  //       color: value ? "red" : "black",
+  //     }}
+  //   >
+  //     {value ? "Super Admin" : "Admin"}
+  //   </b>
+  // );
+
+  // const RightTypeProvider = (props) => (
+  //   <DataTypeProvider formatterComponent={RightFormatter} {...props} />
+  // );
+
   return (
-    <Paper>
+    <Paper style={{ position: "relative" }}>
       <Grid rows={query.data} columns={columns}>
         <SortingState sorting={query.sorting} onSortingChange={setSorting} />
         <PagingState
@@ -63,19 +64,14 @@ export default function UserGrid() {
           onPageSizeChange={setPageSize}
         />
         <CustomPaging totalCount={query.total} />
-        <EditingState
-          onCommitChanges={commitChanges}
-          columnExtensions={editingStateColumnExtensions}
-        />
         <FilteringState onFiltersChange={setFilters} />
         <Table />
         <TableHeaderRow
           showSortingControls
           contentComponent={({ children }) => <b>{children}</b>}
         />
-        <TableEditRow />
-        <TableEditColumn showEditCommand showDeleteCommand />
         <TableFilterRow />
+        {/* <PopupEditing popupComponent={Popup} /> */}
 
         <PagingPanel pageSizes={[10, 20, 30]} />
       </Grid>
