@@ -5,8 +5,6 @@ import {
   CustomPaging,
   SortingState,
   FilteringState,
-  EditingState,
-  TableEditColumn,
   DataTypeProvider,
 } from "@devexpress/dx-react-grid";
 import {

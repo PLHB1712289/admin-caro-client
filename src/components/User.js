@@ -14,7 +14,6 @@ import { useParams } from "react-router-dom";
 import {
   Chart,
   PieSeries,
-  Title,
   Tooltip,
 } from "@devexpress/dx-react-chart-material-ui";
 import { Animation, EventTracker } from "@devexpress/dx-react-chart";
@@ -124,7 +123,6 @@ export default function Game() {
               <EventTracker />
               <Tooltip />
 
-              <Title text="Area of Countries" />
               <Animation />
             </Chart>
           </Paper>
