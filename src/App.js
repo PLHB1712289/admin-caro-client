@@ -5,6 +5,7 @@ import NotFound from "./components/notFound";
 import Dashboard from "./components/dashboard";
 import { CssBaseline } from "@material-ui/core";
 import Game from "./components/Game";
+import User from "./components/User";
 import Games from "./components/Games";
 import Admins from "./components/Admins";
 import Users from "./components/Users";
@@ -41,6 +42,10 @@ function App() {
 
               <Route path={"/admins"}>
                 <Admins />
+              </Route>
+
+              <Route path={"/user/:username"}>
+                <User />
               </Route>
 
               <Route path={"/game/:id"}>
