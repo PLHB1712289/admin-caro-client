@@ -20,6 +20,7 @@ import config from "../../../config";
 import useQuery from "../hooks/useGridQuery";
 import Loading from "../../shared/loading";
 import { Button, Chip, Input, MenuItem, Select } from "@material-ui/core";
+import Moment from "react-moment";
 
 const URL = `${config.URL_SERVER}/games`;
 
@@ -73,6 +74,14 @@ const GoToTypeProvider = (props) => (
   <DataTypeProvider formatterComponent={GoToFormatter} {...props} />
 );
 
+const DateFormatter = ({ value }) => (
+  <Moment format="HH:mm DD/MM/YYYY">{value}</Moment>
+);
+
+const DateTypeProvider = (props) => (
+  <DataTypeProvider formatterComponent={DateFormatter} {...props} />
+);
+
 export default function GameGrid() {
   // Du lieu co ban cho bang
   const [columns] = useState([
@@ -118,8 +127,10 @@ export default function GameGrid() {
           columnExtensions={[
             { columnName: "goto", filteringEnabled: false },
             { columnName: "_id", filteringEnabled: false },
+            { columnName: "created_at", filteringEnabled: false },
           ]}
         />
+        <DateTypeProvider for={["created_at"]} />
         <Table />
         <TableHeaderRow
           showSortingControls
