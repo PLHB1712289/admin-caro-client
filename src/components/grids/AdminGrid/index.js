@@ -22,8 +22,48 @@ import useQuery from "../hooks/useGridQuery";
 import Loading from "../../shared/loading";
 import PopupEditing from "./PopupEditing";
 import Popup from "./Popup";
+import { Chip, Input, MenuItem, Select } from "@material-ui/core";
 
 const URL = `${config.URL_SERVER}/admins`;
+
+const RightFormatter = ({ value }) => (
+  <Chip
+    label={
+      typeof value === "undefined" ? "All" : value ? "Super Admin" : "Admin"
+    }
+  />
+);
+
+const RightEditor = ({ value, onValueChange }) => (
+  <Select
+    input={<Input />}
+    value={
+      typeof value === "undefined" ? "All" : value ? "Super Admin" : "Admin"
+    }
+    onChange={(event) =>
+      onValueChange(
+        event.target.value === "Super Admin"
+          ? true
+          : event.target.value === "Admin"
+          ? false
+          : undefined
+      )
+    }
+    style={{ width: "100%" }}
+  >
+    <MenuItem value="All">All</MenuItem>
+    <MenuItem value="Super Admin">Super Admin</MenuItem>
+    <MenuItem value="Admin">Admin</MenuItem>
+  </Select>
+);
+
+const RightTypeProvider = (props) => (
+  <DataTypeProvider
+    formatterComponent={RightFormatter}
+    editorComponent={RightEditor}
+    {...props}
+  />
+);
 
 export default function AdminGrid() {
   // Du lieu co ban cho bang
@@ -35,9 +75,6 @@ export default function AdminGrid() {
   ]);
   const [editingStateColumnExtensions] = useState([
     { columnName: "username", editingEnabled: false },
-  ]);
-  const [filteringStateColumnExtensions] = useState([
-    { columnName: "isSuperAdmin", filteringEnabled: false },
   ]);
 
   const [query, setQuery, commitChanges] = useQuery(
@@ -57,23 +94,10 @@ export default function AdminGrid() {
     setQuery.setPage(0);
   };
 
-  const RightFormatter = ({ value }) => (
-    <b
-      style={{
-        color: value ? "red" : "black",
-      }}
-    >
-      {value ? "Super Admin" : "Admin"}
-    </b>
-  );
-
-  const RightTypeProvider = (props) => (
-    <DataTypeProvider formatterComponent={RightFormatter} {...props} />
-  );
-
   return (
     <Paper style={{ position: "relative" }}>
       <Grid rows={query.data} columns={columns}>
+        <RightTypeProvider for={["isSuperAdmin"]} />
         <SortingState sorting={query.sorting} onSortingChange={setSorting} />
         <PagingState
           currentPage={query.page}
@@ -86,11 +110,7 @@ export default function AdminGrid() {
           onCommitChanges={commitChanges}
           columnExtensions={editingStateColumnExtensions}
         />
-        <FilteringState
-          onFiltersChange={setFilters}
-          columnExtensions={filteringStateColumnExtensions}
-        />
-        <RightTypeProvider for={["isSuperAdmin"]} />
+        <FilteringState onFiltersChange={setFilters} />
         <Table />
         <TableHeaderRow
           showSortingControls
