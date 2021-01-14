@@ -1,9 +1,9 @@
-import axiosClient from "../../apiClient";
-import URL from "../../apiClient/URL";
+import axiosClient from "../../../httpClient/";
+import URL from "../../../httpClient/URL";
 
 const APIService = {
-  signIn: async (username, password) => {
-    const payload = { username, password };
+  signIn: async (email, password) => {
+    const payload = { email, password };
     const response = await axiosClient.post(URL.SIGN_IN, payload);
 
     return response;
@@ -22,6 +22,11 @@ const APIService = {
 
     return response;
   },
+  getUser:async()=>{
+    const response = await axiosClient.get(URL.GET_USER);
+
+    return response; 
+  }
 };
 
 export default APIService;

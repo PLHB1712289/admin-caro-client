@@ -1,13 +1,35 @@
-import { AppBar, IconButton, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, IconButton, Toolbar, Typography,Button } from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
-import React from "react";
+import React,{useEffect,useState} from "react";
 import useStyles from "./useStyles";
-import { Link } from "react-router-dom";
-
+import { Link ,useHistory} from "react-router-dom";
+import apiService from "../../authentication/signIn/apiService";
 export default function Header({ onDrawerOpen }) {
   const classes = useStyles();
+  const history=useHistory();
 
+  const [token,setToken]=useState(null);
+  const onClickSignIn=()=>{
+    
+    history.push("/sign-in");
+    console.log("Change to sign in page");
+  }
+  const onClickSignOut=()=>{
+    localStorage.removeItem("token");
+    setToken(null);
+    history.push("/sign-in");
+
+  }
+  useEffect(()=>{
+    if(localStorage.getItem("token") !== "undefined"&&localStorage.getItem("token") !== null && token===null)
+    {
+      setToken(localStorage.getItem("token"));
+    }
+    
+    
+  },[token])
   return (
+    
     <AppBar position="absolute" className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
         <IconButton
@@ -31,7 +53,25 @@ export default function Header({ onDrawerOpen }) {
         >
           Dashboard
         </Typography>
+        <Button
+            variant="button"
+            
+            onClick={onClickSignOut}
+
+            >
+            <Typography
+              variant="subtitle1"
+              style={{color:'white'}}
+              
+              
+            >
+              Sign out
+            </Typography>        
+          </Button>
+        
       </Toolbar>
+
+      
     </AppBar>
   );
 }

@@ -14,7 +14,8 @@ import {
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import Progress from "../progress";
+//import Progress from "../progress";
+import Loading from "../../shared/loading"
 import apiService from "./apiService";
 import useStyles from "./style";
 
@@ -86,6 +87,7 @@ const SignIn = () => {
       email,
       password
     );
+    
 
     if (success) {
       localStorage.setItem("token", token);
@@ -112,7 +114,12 @@ const SignIn = () => {
   }, [history]);
 
   return (
-    <Progress isDisplay={isLoad}>
+    <div>
+      {isLoad===true?
+        <Loading />
+        :
+        <div></div>
+      }
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} className={classes.image} />
@@ -178,7 +185,7 @@ const SignIn = () => {
           </div>
         </Grid>
       </Grid>
-    </Progress>
+    </div>
   );
 };
 

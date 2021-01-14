@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -10,8 +10,9 @@ import useStyles from "./useStyles";
 
 export default function SideBar({ open, onDrawerClose }) {
   const classes = useStyles();
-
+  
   return (
+    
     <Drawer
       classes={{
         paper: classes.drawerPaper,
@@ -44,5 +45,6 @@ export default function SideBar({ open, onDrawerClose }) {
         </ListItem>
       </List>
     </Drawer>
+  
   );
 }

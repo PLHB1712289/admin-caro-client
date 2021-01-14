@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3f3c649d-f7ad-45ce-8137-c8e49bd76983" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="F:\Bai_hoc\Nam 4\HK1\Web nc\CK\Admin-caro-client\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1lKfe8xoQ7xXWTsoi1u1h1VsWn0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/login" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Bai_hoc\Nam 4\HK1\Web nc\CK\Admin-caro-client\src\components\login" />
+      <recent name="F:\Bai_hoc\Nam 4\HK1\Web nc\CK\Admin-caro-client\src\apiClient" />
+      <recent name="F:\Bai_hoc\Nam 4\HK1\Web nc\CK\Admin-caro-client\src\components" />
+      <recent name="F:\Bai_hoc\Nam 4\HK1\Web nc\CK\Admin-caro-client\server" />
+      <recent name="F:\Bai_hoc\Nam 4\HK1\Web nc\CK\Admin-caro-client\server\routes" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3f3c649d-f7ad-45ce-8137-c8e49bd76983" name="Default Changelist" comment="" />
+      <created>1607350795759</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1607350795759</updated>
+      <workItem from="1607350797883" duration="1145000" />
+      <workItem from="1607354755257" duration="426000" />
+      <workItem from="1607355375399" duration="837000" />
+      <workItem from="1607439376136" duration="1928000" />
+      <workItem from="1607479551864" duration="9966000" />
+      <workItem from="1607496249722" duration="12000" />
+      <workItem from="1607498322611" duration="6238000" />
+      <workItem from="1607506214954" duration="668000" />
+      <workItem from="1607508251631" duration="165000" />
+      <workItem from="1607511373384" duration="714000" />
+      <workItem from="1607518383791" duration="600000" />
+      <workItem from="1607519646326" duration="16000" />
+      <workItem from="1607527223622" duration="686000" />
+      <workItem from="1607527951973" duration="5000" />
+      <workItem from="1607527977631" duration="11000" />
+      <workItem from="1607559494510" duration="110000" />
+      <workItem from="1607559660043" duration="323000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
