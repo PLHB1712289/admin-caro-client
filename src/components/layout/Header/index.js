@@ -8,11 +8,7 @@ export default function Header({ onDrawerOpen }) {
   const history=useHistory();
 
   const [token,setToken]=useState(null);
-  const onClickSignIn=()=>{
-    
-    history.push("/sign-in");
-    console.log("Change to sign in page");
-  }
+  
   const onClickSignOut=()=>{
     localStorage.removeItem("token");
     setToken(null);

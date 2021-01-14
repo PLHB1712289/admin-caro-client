@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route,Redirect,useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route,Redirect } from "react-router-dom";
 // import SignIn from "./components/signIn";
 import NotFound from "./components/notFound";
 import Dashboard from "./components/dashboard";
@@ -19,7 +19,6 @@ function App() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
-  const history=useHistory();
   const handleDrawerOpen = () => setOpen(true);
 
   const handleDrawerClose = () => setOpen(false);
@@ -38,23 +37,7 @@ function App() {
         : <Redirect to='/sign-in' />
     )} />
   )
-  // if(token===null)
-  // {
-  //   return(
-      // <Router>
-      //   <Switch>
-      //           <Route path={"/sign-in"}>
-      //                     <SignIn />
-      //             </Route>
-      //             <Route >
-      //               <Redirect to="/sign-in"/>
-
-      //             </Route>
-      //   </Switch>
-      // </Router>
-      
-  //   );
-  // }
+  
   return (
     <React.Fragment>
       <CssBaseline />
