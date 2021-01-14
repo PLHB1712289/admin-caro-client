@@ -1,4 +1,11 @@
-import { Grid, Paper } from "@material-ui/core";
+import {
+  Grid,
+  Paper,
+  List,
+  ListItemIcon,
+  ListItemText,
+  ListItem,
+} from "@material-ui/core";
 import { useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Board from "./Board";
@@ -6,8 +13,13 @@ import httpClient from "../../httpClient";
 import config from "../../config";
 import Loading from "../shared/loading";
 import { Pagination } from "@material-ui/lab";
-const size = 20;
+import AccessTimeIcon from "@material-ui/icons/AccessTime";
+import Moment from "react-moment";
+import NoteIcon from "@material-ui/icons/Note";
+import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
+import MessageGrid from "../grids/MessageGrid";
 
+const size = 20;
 function generateDefaultBoard() {
   return Array(size).fill(Array(size).fill(null));
 }
@@ -28,16 +40,18 @@ export default function Game() {
     setLoading(true);
     const params = page ? { page: total - page + 1 } : {};
     httpClient.get(MOVES_URL, { params }).then((res) => {
-      const board = res.data.moves[0].board;
-      const currentPage = page ? page : res.data.total;
-      const total = res.data.total;
-      const rowValues = [];
-      for (let i = 0, j = board.length; i < j; i += size) {
-        rowValues.push(board.slice(i, i + size));
+      if (res.data.moves.length > 0) {
+        const board = res.data.moves[0].board;
+        const currentPage = page ? page : res.data.total;
+        const total = res.data.total;
+        const rowValues = [];
+        for (let i = 0, j = board.length; i < j; i += size) {
+          rowValues.push(board.slice(i, i + size));
+        }
+        setRowValues(rowValues);
+        setPage(currentPage);
+        setTotal(total);
       }
-      setRowValues(rowValues);
-      setPage(currentPage);
-      setTotal(total);
       setLoading(false);
     });
   }
@@ -66,6 +80,37 @@ export default function Game() {
             elevation={5}
           >
             <h1 style={{ fontSize: 20 }}>Match summary</h1>
+            <List>
+              <ListItem>
+                <ListItemIcon>
+                  <AccessTimeIcon />
+                </ListItemIcon>
+                <ListItemText>
+                  Started at&nbsp;
+                  <b>
+                    <Moment format="HH:mm DD/MM/YYYY">{game.created_at}</Moment>
+                  </b>
+                </ListItemText>
+              </ListItem>
+              <ListItem>
+                <ListItemIcon>
+                  <NoteIcon />
+                </ListItemIcon>
+                <ListItemText>
+                  <b>{total}</b>&nbsp;moves
+                </ListItemText>
+              </ListItem>
+              {game.winner && (
+                <ListItem>
+                  <ListItemIcon>
+                    <EmojiPeopleIcon />
+                  </ListItemIcon>
+                  <ListItemText>
+                    <b>{game.winner}</b>&nbsp;was the winner
+                  </ListItemText>
+                </ListItem>
+              )}
+            </List>
           </Paper>
         </Grid>
         <Grid item xs={3}>
@@ -106,6 +151,9 @@ export default function Game() {
           count={total}
           onChange={(e, page) => handlePageChange(page)}
         />
+      </Grid>
+      <Grid container justify="center" style={{ marginTop: 50 }}>
+        <MessageGrid idGame={id} />
       </Grid>
     </Paper>
   );
