@@ -14,6 +14,7 @@ import Header from "./components/layout/Header";
 import SideBar from "./components/layout/SideBar";
 import SignIn from "./components/authentication/signIn";
 
+
 function App() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -30,6 +31,13 @@ function App() {
     }
    
   },[token])
+  const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={(props) => (
+      token!==null
+        ? <Component {...props} />
+        : <Redirect to='/sign-in' />
+    )} />
+  )
   // if(token===null)
   // {
   //   return(
@@ -68,29 +76,16 @@ function App() {
                   <SignIn />
               </Route>
 
-              <Route path={"/games"}>
-                <Games />
-              </Route>
+              <PrivateRoute path='/games' component={Games} />
+              <PrivateRoute path='/users' component={Users} />
+              <PrivateRoute path='/admins' component={Admins} />
+              <PrivateRoute path='/user/:username' component={User} />
+              <PrivateRoute path='/game/:id' component={Game} />
+              <PrivateRoute path='/' component={Dashboard} />
+
               
-              <Route path={"/users"}>
-                <Users />
-              </Route>
+             
 
-              <Route path={"/admins"}>
-                <Admins />
-              </Route>
-
-              <Route path={"/user/:username"}>
-                <User />
-              </Route>
-
-              <Route path={"/game/:id"}>
-                <Game />
-              </Route>
-              
-              <Route path={"/"}>
-                <Dashboard />
-              </Route>
 
               <Route>
                 <NotFound />
